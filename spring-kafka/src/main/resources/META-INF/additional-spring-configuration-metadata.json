@@ -1,0 +1,10 @@
+{
+  "groups": [
+    {
+      "sourceType": "com.nbenja.springboot.springkafka.KafkaSettings",
+      "name": "kafka",
+      "type": "com.nbenja.springboot.springkafka.KafkaSettings"
+    }
+  ]
+
+}

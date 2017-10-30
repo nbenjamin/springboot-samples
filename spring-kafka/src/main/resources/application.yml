@@ -1,0 +1,31 @@
+spring:
+  kafka:
+    consumer:
+      group-id: foo
+      auto-offset-reset: earliest
+
+kafka:
+  consumers:
+    - name: test-consumer-1
+      topic : demo-consumer-topic-1
+      listener:
+      properties:
+        '[bootstrap.servers]': localhost:9092
+        '[group.id]': test-group-id-1
+
+    - name: test-consumer-2
+      topic : demo-consumer-topic-2
+      properties:
+        '[bootstrap.servers]': localhost:9092
+        '[group.id]': test-group-id-2
+
+  producers:
+    - name: test-producer-1
+      topic: demo-consumer-topic-1
+
+    - name: test-producer-2
+      topic: demo-consumer-topic-2
+  listeners:
+    name:
+
+
