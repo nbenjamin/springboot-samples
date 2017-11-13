@@ -1,0 +1,17 @@
+kafka:
+  producer:
+#    bootstrap.servers: localhost:9092
+    acks: 1
+    key.serializer: org.apache.kafka.common.serialization.StringSerializer
+    value.serializer: org.apache.kafka.common.serialization.StringSerializer
+    session.timeout.ms: 20000
+    buffer.memory: 33554432
+    retries: 0
+  consumer:
+#    bootstrap.servers: localhost:9092
+    key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    enable.auto.commit: false
+    group.id: test-group
+    session.timeout.ms: 20000
+    auto.commit.interval.ms: 100
