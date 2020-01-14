@@ -1,0 +1,68 @@
+
+server:
+  port: 8083
+
+#logging:
+#  level:
+#    io.github.resilience4j: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+resilience4j:
+
+  retry:
+    backends:
+      retryService:
+        maxRetryAttempts: 3
+        waitDuration: 1000
+        retryExceptions:
+          - java.lang.ClassCastException
+        ignoreExceptions:
+
+  circuitbreaker:
+    backends:
+      demo:
+        waitDurationInOpenState: 10
+        ringBufferSizeInClosedState: 6
+        ringBufferSizeInHalfOpenState: 2
+        waitInterval: 5000
+        failureRateThreshold: 7
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
+        recordExceptions:
+          - java.lang.ClassCastException
+        ignoreExceptions:
+
+
+  ratelimiter:
+    limiters:
+      rl:
+        limitForPeriod: 5
+        limitRefreshPeriodInMillis: 5000
+        timeoutInMillis: 5000
+        subscribeForEvents: true
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+
+  bulkhead:
+    backends:
+      service1:
+        registerHealthIndicator: true
+        maxConcurrentCall: 2
+        maxWaitDuration: 20s
+      service2:
+        registerHealthIndicator: true
+        maxWaitDuration: 10s
+        maxConcurrentCall: 20
+
+#  thread-pool-bulkhead:
+#    instances:
+#      service3:
+#        threadPoolProperties:
+#          registerHealthIndicator: true
+#          maxThreadPoolSize: 1
+#          coreThreadPoolSize: 1
+#          queueCapacity: 1
